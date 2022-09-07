@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    height: 100vh;
+    background: linear-gradient(200deg, #ddd, #faaca8);
+}
+
+/* 三个元素需要弹性布局 */
+body,.navbar,.navbar ul{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar{
+    position: relative;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 50px;
+}
+
+.navbar input{
+    width: 40px;
+    height: 40px;
+    /* 复选框透明 */
+    opacity: 0;
+    cursor: pointer;
+}
+
+.navbar span{
+    position: absolute;
+    left: 25px;
+    width: 30px;
+    height: 4px;
+    /* 现在将两条线放在一起 然后单独设置第二条线的位置 */
+    top: calc(50% - 10px);
+    border-radius: 15px;
+    background-color: #999;
+    pointer-events: none;
+    /* 收回来时过度相反 */
+    transition: transform 0.3s ease-in-out, top 0.3s ease-in-out 0.3s;
+}
+
+/* 第二条线在navbar这个元素内的第三个位置*/
+.navbar span:nth-child(3){
+    top: calc(50% + 6px);
+}
+
+.navbar ul{
+    width: 0;
+    /* 溢出隐藏 */
+    overflow: hidden;
+    /* 过度 展开收起自然 */
+    transition: all 0.5s;
+    white-space: nowrap;
+}
+
+.navbar ul li{
+    list-style: none;
+    margin: 0px 15px;
+}
+
+.navbar ul li a{
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 700;
+    color: #333;
+}
+
+.navbar ul li a:hover{
+    color: #faaca8;
+}
+
+/* :checked 是当复选框被选中时 ~ 是查找同一级的ul */
+.navbar input:checked ~ ul{
+    width: 350px;
+}
+
+.navbar input:checked ~ span:nth-child(2){
+    top: calc(50% - 2px);
+    transform: rotate(-45deg);
+    background-color: #faaca8;
+    transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+}
+
+.navbar input:checked ~ span:nth-child(3){
+    top: calc(50% - 2px);
+    transform: rotate(45deg);
+    background-color: #faaca8;
+    transition: top 0.3s ease-in-out, transform 0.3s ease-in-out 0.3s;
+}
